@@ -11,6 +11,7 @@ spec:
   - protocol: TCP
     port: 3000
     targetPort: 3000
+    name: port1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -32,3 +33,4 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
+          containerPort: 443

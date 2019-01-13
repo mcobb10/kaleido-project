@@ -7,9 +7,11 @@ metadata:
 spec:
   ports:
   - port: 8545
-    name: port1
+    name: rpc
   - port: 8546
-    name: port2
+    name: websocket
+  - port: 30303
+    name: port3
   clusterIP: 10.96.0.99
   selector:
     app: node
@@ -42,9 +44,11 @@ spec:
         args: ["-c", "start.sh --bootnode=\"enode://2802d659859f0304d210f4e0163d65bc192523b1a4cc92686fa69da6eb4b80052f39ca6071d2ca84b29cba598f5afb9396f47c5f20653567395fc0facbed9f46@10.96.0.100:30301\" --raftInit  --networkid 2018"]
         ports:
         - containerPort: 8545
-          name: port1
+          name: rpc
         - containerPort: 8546
-          name: port2
+          name: websocket
+        - containerPort: 30303
+          name: port3
         volumeMounts:
         - name: qdata-1
           mountPath: /qdata
@@ -83,9 +87,11 @@ spec:
         args: ["-c", "start.sh --bootnode=\"enode://2802d659859f0304d210f4e0163d65bc192523b1a4cc92686fa69da6eb4b80052f39ca6071d2ca84b29cba598f5afb9396f47c5f20653567395fc0facbed9f46@10.96.0.100:30301\" --raftInit  --networkid 2018"]
         ports:
         - containerPort: 8545
-          name: port1
+          name: rpc
         - containerPort: 8546
-          name: port2
+          name: websocket
+        - containerPort: 30303
+          name: port3
         volumeMounts:
         - name: qdata-2
           mountPath: /qdata
@@ -124,9 +130,11 @@ spec:
         args: ["-c", "start.sh --bootnode=\"enode://2802d659859f0304d210f4e0163d65bc192523b1a4cc92686fa69da6eb4b80052f39ca6071d2ca84b29cba598f5afb9396f47c5f20653567395fc0facbed9f46@10.96.0.100:30301\" --raftInit  --networkid 2018"]
         ports:
         - containerPort: 8545
-          name: port1
+          name: rpc
         - containerPort: 8546
-          name: port2
+          name: websocket
+        - containerPort: 30303
+          name: port3
         volumeMounts:
         - name: qdata-3
           mountPath: /qdata
@@ -165,9 +173,11 @@ spec:
         args: ["-c", "start.sh --bootnode=\"enode://2802d659859f0304d210f4e0163d65bc192523b1a4cc92686fa69da6eb4b80052f39ca6071d2ca84b29cba598f5afb9396f47c5f20653567395fc0facbed9f46@10.96.0.100:30301\" --raftInit  --networkid 2018"]
         ports:
         - containerPort: 8545
-          name: port1
+          name: rpc
         - containerPort: 8546
-          name: port2
+          name: websocket
+        - containerPort: 30303
+          name: port3
         volumeMounts:
         - name: qdata-4
           mountPath: /qdata
@@ -206,9 +216,11 @@ spec:
         args: ["-c", "start.sh --bootnode=\"enode://2802d659859f0304d210f4e0163d65bc192523b1a4cc92686fa69da6eb4b80052f39ca6071d2ca84b29cba598f5afb9396f47c5f20653567395fc0facbed9f46@10.96.0.100:30301\" --raftInit  --networkid 2018"]
         ports:
         - containerPort: 8545
-          name: port1
+          name: rpc
         - containerPort: 8546
-          name: port2
+          name: websocket
+        - containerPort: 30303
+          name: port3
         volumeMounts:
         - name: qdata-5
           mountPath: /qdata
