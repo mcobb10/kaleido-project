@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: qdata-1
+spec:
+  storageClassName: node-1
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: "/data/qdata_1/"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: qdata-2
+spec:
+  storageClassName: node-2
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: "/data/qdata_2/"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: qdata-3
+spec:
+  storageClassName: node-3
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: "/data/qdata_3/"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: qdata-4
+spec:
+  storageClassName: node-4
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: "/data/qdata_4/"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: qdata-5
+spec:
+  storageClassName: node-5
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: "/data/qdata_5/"
