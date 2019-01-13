@@ -2,7 +2,7 @@
 
 ## Setup
 
-### Prerequistes 
+### Prerequisites
 * minikube is installed on your machine
 * Increase minikube resources to cpus: 4, memory: 4GB, disk-space: 64GB (This is probably overkill but I had resources to spare and ran into vm lockups before this increase.)
 ```
@@ -35,7 +35,7 @@ sudo docker save "image-name" | pv | (eval $(minikube docker-env) && docker load
 
 This setup can be thought of as 3 services: racecourse-service, bootnode-service, and node-service. 
 
-The racecourse-service is backed the racecourse-deployment that runs a single pod racecourse webapp and is accessed by the raceourse-ingress that directs web browser traffic hitting the minikube vm through to the racecourse pod on port 3000.
+The racecourse-service is backed the racecourse-deployment that runs a single pod racecourse webapp and is accessed by the racecourse-ingress that directs web browser traffic hitting the minikube vm through to the racecourse pod on port 3000.
 
 The bootnode-service is backed by a stateful set (bootnode-set) with replicas set to 1. The pod created by this set is running a single quorum container. This set utilizes a corresponding PVC and PV that provide it a persistent volume. It has a clusterIP of 10.96.0.100 to be used by the quorum nodes for establishing the p2p network. 
 
