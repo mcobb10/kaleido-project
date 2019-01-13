@@ -1,8 +1,8 @@
 # kaleido-project
 
-##Setup
+## Setup
 
-###Prerequistes 
+### Prerequistes 
 * minikube is installed on your machine
 * Increase minikube resources to cpus: 4, memory: 4GB, disk-space: 64GB (This is probably overkill but I had resources to spare and ran into vm lockups before this increase.)
 ```
@@ -13,7 +13,7 @@ minikube config set disk-space 64GB
 * Racecourse webapp is built into a nodejs image named test/racecourse (this can be changed in racecourse_deployment.yaml if needed)
 * Quorum-Tools images have been built and quorum-tools/examples/setup.sh has been ran
 
-###Launching Cluster
+### Launching Cluster
 * Run `minikube start`
 * Copy test/racecourse, jpmorganchase/quorum, and jpmorganchase/constellation from local machine to minikube vm: 
 >    docker save "image-name" | pv | (eval $(minikube docker-env) && docker load)
@@ -27,7 +27,7 @@ Note: This command is basically saving the local docker image to a file then pip
 ```
 * Once the needed files are in place everything should eventually restart correctly
 
-##Discussion of Architecture
+## Discussion of Architecture
 
 This setup can be thought of as 3 services: racecourse-service, bootnode-service, and node-service. 
 
@@ -37,7 +37,7 @@ The bootnode-service is backed by a stateful set (bootnode-set) with replicas se
 
 The node-service is backed by 5 stateful sets (node-set-1 to 5) with replicas set to 1. The pod that is created by these sets consists of a quorum container and a constellation container. These sets also utilize corresponding PVC and PV definitions that provide the various sets a persistent volume. The service has a clusterIP of 10.96.0.99 to allow it to be contacted by the racecourse webapp easily.
 
-##Discussion of Design Decisions
+## Discussion of Design Decisions
 
 The racecourse webapp is running as a deployment since it is generally stateless and only connects back to the node-service for running transactions against the blockchain. The bootnode and quorum nodes need to have persistent volumes to maintain various files for operation (i.e. nodekeys, blockchain, ect) so I have created them as stateful sets. Normally the stateful sets would contain a volumeClaimTemplate but I ran into issues with minikube and mounting the local directories that back the persistent volumes so I eventually factored out the PVCs and PVs to make sure I was specifying everything correctly. This is also why I have opted for 5 stateful sets for the nodes instead of one that has 5 replicas. To make sure I had all storage issues ironed out, I split the needed pods out into their own stateful set and assigned them all a particular PV instead of allowing them to provision dynamically.
 
