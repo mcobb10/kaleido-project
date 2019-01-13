@@ -16,8 +16,10 @@ minikube config set disk-space 64GB
 ### Launching Cluster
 * Run `minikube start`
 * Copy test/racecourse, jpmorganchase/quorum, and jpmorganchase/constellation from local machine to minikube vm: 
->    docker save "image-name" | pv | (eval $(minikube docker-env) && docker load)
-Note: This command is basically saving the local docker image to a file then piping it into the minikube docker instance and loading it. It would be more ideal here to use a docker registry but this worked for testing purposes
+```
+docker save "image-name" | pv | (eval $(minikube docker-env) && docker load)
+```
+> Note: This command is basically saving the local docker image to a file then piping it into the minikube docker instance and loading it. It would be more ideal here to use a docker registry but this worked for testing purposes
 * Run 'kubectl apply -f filename.yaml' for all yaml configuration files in the kaliedo-project directory
 * When the bootnode and node stateful sets try to start they will error out but will create their persistent volumes
 * Mount the quorum-tools/examples/tmp directory in minikube and copy needed files over:
