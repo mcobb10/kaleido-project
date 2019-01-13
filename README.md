@@ -8,24 +8,26 @@
 ```
 minikube config set cpus 4
 minikube config set memory 4096
-minikube config set disk-space 64GB
+minikube config set disk-size 64GB
 ```
 * Racecourse webapp is built into a nodejs image named test/racecourse (this can be changed in racecourse_deployment.yaml if needed)
 * Quorum-Tools images have been built and quorum-tools/examples/setup.sh has been ran
 
 ### Launching Cluster
 * Run `minikube start`
+* Run `minikube addons enable ingress`
 * Copy test/racecourse, jpmorganchase/quorum, and jpmorganchase/constellation from local machine to minikube vm: 
 ```
-docker save "image-name" | pv | (eval $(minikube docker-env) && docker load)
+sudo docker save "image-name" | pv | (eval $(minikube docker-env) && docker load)
 ```
-> Note: This command is basically saving the local docker image to a file then piping it into the minikube docker instance and loading it. It would be more ideal here to use a docker registry but this worked for testing purposes
+> Note: This command is basically saving the local docker image to a file then piping it into the minikube docker instance and loading it. The process may take several minutes to complete based on the size of the image. It would be more ideal here to use a docker registry but this worked for testing purposes.
 * Run 'kubectl apply -f filename.yaml' for all yaml configuration files in the kaliedo-project directory
 * When the bootnode and node stateful sets try to start they will error out but will create their persistent volumes
-* Mount the quorum-tools/examples/tmp directory in minikube and copy needed files over:
+* Mount the quorum-tools/examples/tmp directory in minikube and copy needed files over (replace disk_num with number 0-5):
 ```
 (terminal 1) minikube mount ~/quorum-tools/examples/tmp:/tmp/hostpath_pv
-(terminal 2) sudo cp /tmp/hostpath_pv/qdata_<disk_num>/* /data/<disk_num>/ (this should be ran for qdata_0 to qdata_5)
+(terminal 2) minikube ssh
+(terminal 2) sudo cp -r /tmp/hostpath_pv/qdata_<disk_num>/* /data/qdata_<disk_num>/ 
 ```
 * Once the needed files are in place everything should eventually restart correctly
 
